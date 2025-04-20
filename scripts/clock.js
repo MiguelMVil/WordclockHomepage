@@ -136,8 +136,10 @@ function updateClock(hour, minute) {
     }
     
     console.log(hour_editable)
-    hour_values[hour_editable - 1].classList.add('turned-on')
-    hour_values[hour_editable - 1].classList.remove('turned-off')
+    hour_values[hour_editable - 1].forEach(element => {
+        element.classList.add('turned-on')
+        element.classList.remove('turned-off')
+    })
 }
 
 setInterval(updateTime, 1000)
