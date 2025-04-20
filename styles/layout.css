@@ -1,0 +1,63 @@
+* {
+    box-sizing: border-box;
+}
+
+/* using the body as a clean slate */
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.mega-container {
+    width: 100vw;
+    height:100vh;
+
+    display: flex;
+    flex-direction: row;
+
+    /* for testing */
+    background-color: red;
+}
+
+.quotes-container {
+    width: 35vw;
+    height: 100vh;
+
+    /* for testing  */
+    background-color: blue;
+}
+
+.clock-container {
+    width: 65vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: space-evenly;
+    
+
+    /* for testing */
+    background-color: orange;
+}
+
+.clock {
+    width: 40vw;
+    height: 40vw;
+
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto ;
+}
+
+.clock-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.constant {
+    color: blue;
+}
