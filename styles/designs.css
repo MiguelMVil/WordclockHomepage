@@ -5,3 +5,10 @@
 .turned-off {
     color: black;
 }
+
+.clock-item {
+    font-size: 4rem;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+}
+
