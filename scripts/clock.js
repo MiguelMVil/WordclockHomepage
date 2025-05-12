@@ -53,6 +53,8 @@ const hour_values = [ONE, TWO, THREE,
                      TEN, ELEVEN, TWELVE]
 const allComponents = [quarter, twenty, five, half, ten, to, past, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, ELEVEN, TWELVE, OCLOCK, a]
 
+const greeting = document.querySelector('.greeting')
+
 function updateTime() {
     const now = new Date()
 
@@ -69,6 +71,18 @@ function updateTime() {
     let minute = now.getMinutes()
 
     updateClock(hour, minute)
+
+    updateTimeOfDay(hour)
+}
+
+function updateTimeOfDay(hour) {
+    if (hour < 12) {
+        greeting.textContent = 'Good Morning!'
+    } else if (hour < 18) {
+        greeting.textContent = 'Good Afternoon!'
+    } else {
+        greeting.textContent = 'Good Evening!'
+    }
 }
 
 // changes the date in the top-right portion of the clock
@@ -111,8 +125,10 @@ function updateClock(hour, minute) {
         })
     })
 
-    let index = (minute_editable - (minute_editable % 5)) / 5 // gets the index of the time value
+    // Round to nearest 5 minutes instead of floor
+    let index = Math.round(minute_editable / 5) % 12
 
+    console.log("minute", index, minute_editable)
     time_values[index].forEach(component => {
         component.forEach(item => {
             // add the turned-on class
@@ -122,24 +138,27 @@ function updateClock(hour, minute) {
         })
     })
 
-    // fixing the hours
-    if (hour_editable > 12) { // shifts the hours to a 12-based clock
+    // Convert to 12-hour format
+    if (hour_editable > 12) {
         hour_editable = hour_editable - 12
-    }
-
-    if (hour_editable === 0) { // fixes the 0 hour
+    } else if (hour_editable === 0) {
         hour_editable = 12
     }
 
-    if (minute_editable > 30) { // since it goes from "past X" to "to X"
-        hour_editable = hour_editable + 1
+    // Adjust hour for "to" times (after 30 minutes)
+    if (minute_editable > 30) {
+        hour_editable = (hour_editable % 12) + 1
     }
     
     console.log(hour_editable)
-    hour_values[hour_editable - 1].forEach(element => {
+    // Ensure hour index is always valid (1-12 mapped to 0-11)
+    const hourIndex = ((hour_editable - 1) % 12)
+    hour_values[hourIndex].forEach(element => {
         element.classList.add('turned-on')
         element.classList.remove('turned-off')
     })
 }
 
+
+updateTime()
 setInterval(updateTime, 1000)
