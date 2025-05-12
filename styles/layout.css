@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    user-select: none;
 }
 
 /* using the body as a clean slate */
@@ -60,4 +61,31 @@ body {
 
 .constant {
     color: blue;
+}
+
+.greeting {
+    font-size: 5rem;
+}
+
+.quotes-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    padding: 2rem;
+}
+
+.quote-title{
+    font-size: 3rem;
+}
+
+.quote-content{
+    font-size: 2rem;
+    text-align: center;
+}   
+
+.quote-author{
+    font-size: 2rem;
+    font-style: italic;
 }
